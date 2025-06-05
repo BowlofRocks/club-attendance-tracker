@@ -1,6 +1,8 @@
 import Nav from "./views/partials/Header/Nav";
 import Footer from "./views/partials/Footer/Index"
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import AttendanceList from "./views/attendance/Index";
+
 
 function App() {
   return (
@@ -9,9 +11,9 @@ function App() {
         <Nav />
       </header>
       
-      <main>
+      <main className="main-content">
         <Routes>
-          <Route path="/" element={<h1>Home Page</h1>} />
+          <Route path="/" element={<AttendanceList />} />
         </Routes>
       </main>
 

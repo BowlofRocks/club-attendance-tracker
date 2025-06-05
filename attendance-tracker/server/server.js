@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/api/members", (req, res) => {
-  const filePath = path.join(process.cwd(), "server", "models", "members.json");
+  const filePath = path.join(process.cwd(), "models", "members.json");
   const data = fs.readFileSync(filePath, "utf-8");
   res.json(JSON.parse(data));
 });
