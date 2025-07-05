@@ -7,7 +7,7 @@ const NavBar = () => {
     <AppBar position="static">
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="h6" component="div">
-          MySeniorProject
+          Club Attendance Tracker
         </Typography>
         
         <Box>

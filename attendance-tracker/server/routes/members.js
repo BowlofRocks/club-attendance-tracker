@@ -48,4 +48,41 @@ router.delete("/:id", (req, res) => {
   }
 });
 
+// NEW ROUTE: Update attendance for a specific month of a member
+router.put("/:id/attendance/:month", (req, res) => {
+  try {
+    const memberId = parseInt(req.params.id);
+    const month = req.params.month;
+    const attendanceUpdate = req.body; // Expecting { presentDates: [], count: number, total: number }
+
+    if (
+      !attendanceUpdate ||
+      !Array.isArray(attendanceUpdate.presentDates) ||
+      typeof attendanceUpdate.count !== "number" ||
+      typeof attendanceUpdate.total !== "number"
+    ) {
+      return res.status(400).json({ error: "Invalid attendance data format" });
+    }
+
+    const data = JSON.parse(fs.readFileSync(membersFilePath, "utf-8"));
+    const memberIndex = data.findIndex((m) => m.id === memberId);
+
+    if (memberIndex === -1) {
+      return res.status(404).json({ error: "Member not found" });
+    }
+
+    // Update attendance for the specified month
+    data[memberIndex].attendance[month] = attendanceUpdate;
+
+    fs.writeFileSync(membersFilePath, JSON.stringify(data, null, 2), "utf-8");
+
+    res
+      .status(200)
+      .json({ message: "Attendance updated", attendance: attendanceUpdate });
+  } catch (err) {
+    console.error("Error updating attendance:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 export default router;

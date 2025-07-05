@@ -20,7 +20,7 @@ type Member = {
 const AttendanceList = () => {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedMonth, setSelectedMonth] = useState("June");
+  const [selectedMonth, setSelectedMonth] = useState("January");
   const [newMemberName, setNewMemberName] = useState("");
 
   const [paginationModel, setPaginationModel] = useState({
@@ -36,7 +36,7 @@ const AttendanceList = () => {
     day: "numeric",
   });
 
-  // ✅ Fetch members from backend
+  // Fetch members from backend
   const fetchMembers = async () => {
     try {
       const res = await fetch("http://localhost:3001/api/members");
@@ -83,7 +83,7 @@ const AttendanceList = () => {
     // Future: Send update to backend here
   };
 
-  // ✅ Create new member and refresh list
+  // Create new member and refresh list
   const handleAddMember = async () => {
     if (!newMemberName.trim()) return;
 
@@ -102,7 +102,7 @@ const AttendanceList = () => {
     }
   };
 
-  // ✅ Delete member and refresh list
+  // Delete member and refresh list
   const handleDeleteMember = async (id: number) => {
     try {
       const res = await fetch(`http://localhost:3001/api/members/${id}`, {
@@ -115,6 +115,57 @@ const AttendanceList = () => {
       console.error("Error deleting member:", err);
     }
   };
+
+  // Clear attendance for selected month for all members
+  const handleClearAll = async () => {
+    try {
+      // Update members locally first by clearing attendance for selectedMonth
+      const clearedMembers = members.map((member) => {
+        const updatedAttendance = { ...member.attendance };
+        updatedAttendance[selectedMonth] = {
+          presentDates: [],
+          count: 0,
+          total: updatedAttendance[selectedMonth]?.total || 16,
+        };
+        return { ...member, attendance: updatedAttendance };
+      });
+
+      setMembers(clearedMembers);
+
+      // Send updated attendance data to backend for persistence
+      await Promise.all(
+        clearedMembers.map((member) =>
+          fetch(`http://localhost:3001/api/members/${member.id}/attendance/${selectedMonth}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(member.attendance[selectedMonth]),
+          })
+        )
+      );
+
+      alert(`Cleared attendance for all members in ${selectedMonth}`);
+    } catch (error) {
+      console.error("Failed to clear attendance:", error);
+      alert("There was a problem clearing attendance. Please try again.");
+    }
+  };
+
+  // Generate list of months dynamically from members data
+  // Gather all unique months from attendance objects of all members
+  const allMonthsSet = new Set<string>();
+  members.forEach(member => {
+    Object.keys(member.attendance).forEach(month => {
+      allMonthsSet.add(month);
+    });
+  });
+  const allMonths = Array.from(allMonthsSet).sort((a, b) => {
+    // Optional: sort months in calendar order, otherwise alphabetically
+    const monthOrder = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    return monthOrder.indexOf(a) - monthOrder.indexOf(b);
+  });
 
   const tableData = members.map((member) => {
     const monthData = member.attendance[selectedMonth] || {
@@ -146,21 +197,21 @@ const AttendanceList = () => {
       sortable: false,
       filterable: false,
     },
-   {
-  field: "delete",
-  headerName: "Delete",
-  width: 100,
-  renderCell: (params) => (
-    <button
-      className="delete-button"
-      onClick={() => handleDeleteMember(params.row.id)}
-    >
-      🗑️
-    </button>
-  ),
-  sortable: false,
-  filterable: false,
-},
+    {
+      field: "delete",
+      headerName: "Delete",
+      width: 100,
+      renderCell: (params) => (
+        <button
+          className="delete-button"
+          onClick={() => handleDeleteMember(params.row.id)}
+        >
+          🗑️
+        </button>
+      ),
+      sortable: false,
+      filterable: false,
+    },
   ];
 
   return (
@@ -175,12 +226,19 @@ const AttendanceList = () => {
         onChange={(e) => setSelectedMonth(e.target.value)}
         style={{ marginBottom: "1rem" }}
       >
-        <option value="June">June</option>
-        <option value="May">May</option>
-        <option value="April">April</option>
+        {allMonths.map(month => (
+          <option key={month} value={month}>{month}</option>
+        ))}
       </select>
 
-      <div style={{ marginBottom: "1rem" }}>
+      <button
+        onClick={handleClearAll}
+        style={{ marginLeft: "1rem", backgroundColor: "#f44336", color: "white", padding: "0.5rem 1rem", border: "none", borderRadius: "4px", cursor: "pointer" }}
+      >
+        Clear All Attendance for {selectedMonth}
+      </button>
+
+      <div style={{ marginBottom: "1rem", marginTop: "1rem" }}>
         <input
           type="text"
           placeholder="New member name"
