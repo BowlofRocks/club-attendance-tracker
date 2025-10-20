@@ -1,6 +1,4 @@
 // views/partials/Footer/Footer.tsx
-
-import React from 'react';
 import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
 
 const features = [

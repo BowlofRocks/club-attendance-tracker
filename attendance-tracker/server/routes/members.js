@@ -1,33 +1,85 @@
 // routes/members.js
 import express from "express";
-import fs from "fs";
-import path from "path";
+import db from "../db/index.js";
 
 const router = express.Router();
-const membersFilePath = path.join(process.cwd(), "models", "members.json");
 
+// Get all members with their tier and pay status info
 router.get("/", (req, res) => {
-  const data = fs.readFileSync(membersFilePath, "utf-8");
-  res.json(JSON.parse(data));
+  const query = `
+    SELECT 
+      m.member_id as id,
+      CONCAT(m.first_name, ' ', m.last_name) as name,
+      m.first_name,
+      m.last_name,
+      m.email,
+      m.phone,
+      m.join_date,
+      t.type as tier_type,
+      ps.type as pay_status
+    FROM member m
+    LEFT JOIN tier t ON m.tier_id = t.tier_id
+    LEFT JOIN pay_status ps ON m.pay_status_id = ps.status_id
+    ORDER BY m.member_id
+  `;
+  
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    
+    // Format results to match your frontend expectations
+    const members = results.map(member => ({
+      id: member.id,
+      name: member.name,
+      first_name: member.first_name,
+      last_name: member.last_name,
+      email: member.email,
+      phone: member.phone,
+      join_date: member.join_date,
+      tier_type: member.tier_type,
+      pay_status: member.pay_status,
+      attendance: {} // Will be populated from attendance table later
+    }));
+    
+    res.json(members);
+  });
 });
 
+// Add a new member
 router.post("/", (req, res) => {
-  try {
-    const { name } = req.body;
-    if (!name) return res.status(400).json({ error: "Name is required" });
-
-    const data = JSON.parse(fs.readFileSync(membersFilePath, "utf-8"));
-    const newId = data.length ? Math.max(...data.map((m) => m.id)) + 1 : 1;
-
-    const newMember = { id: newId, name, attendance: {} };
-    data.push(newMember);
-    fs.writeFileSync(membersFilePath, JSON.stringify(data, null, 2), "utf-8");
-
-    res.status(201).json(newMember);
-  } catch (err) {
-    console.error("Error adding member:", err);
-    res.status(500).json({ error: "Server error" });
+  const { first_name, last_name, email, phone, tier_id = 1, pay_status_id = 1 } = req.body;
+  
+  if (!first_name || !last_name) {
+    return res.status(400).json({ error: "First name and last name are required" });
   }
+
+  const query = `
+    INSERT INTO member (first_name, last_name, email, phone, join_date, tier_id, pay_status_id)
+    VALUES (?, ?, ?, ?, CURDATE(), ?, ?)
+  `;
+  
+  db.query(query, [first_name, last_name, email, phone, tier_id, pay_status_id], (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    
+    const newMember = {
+      id: result.insertId,
+      name: `${first_name} ${last_name}`,
+      first_name,
+      last_name,
+      email,
+      phone,
+      tier_id,
+      pay_status_id,
+      join_date: new Date().toISOString().split('T')[0]
+    };
+    
+    res.status(201).json(newMember);
+  });
 });
 
 router.delete("/:id", (req, res) => {

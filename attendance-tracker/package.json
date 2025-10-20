@@ -1,35 +1,24 @@
 {
-  "name": "attendance-tracker",
-  "private": true,
-  "version": "0.0.0",
+  "name": "club-attendance-tracker",
+  "version": "1.0.0",
+  "description": "Club Attendance Tracker - Full Stack Application",
+  "main": "app.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"npm run dev --prefix server\"",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "start": "node app.js",
+    "build": "npm install && npm run build:frontend",
+    "build:frontend": "npm run build --prefix ."
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/material": "^7.1.0",
-    "@mui/x-data-grid": "^8.5.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.0"
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.1"
   },
-  "devDependencies": {
-    "@eslint/js": "^9.25.0",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react": "^4.4.1",
-    "concurrently": "^9.2.0",
-    "eslint": "^9.25.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5"
-  }
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["attendance", "tracker", "react", "express", "mysql"],
+  "author": "",
+  "license": "ISC"
 }

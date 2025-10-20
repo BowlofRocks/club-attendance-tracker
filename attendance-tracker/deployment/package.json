@@ -1,0 +1,24 @@
+{
+  "name": "club-attendance-tracker",
+  "version": "1.0.0",
+  "description": "Club Attendance Tracker - Full Stack Application",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "build": "npm install && npm run build:frontend",
+    "build:frontend": "npm run build --prefix ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["attendance", "tracker", "react", "express", "mysql"],
+  "author": "",
+  "license": "ISC"
+}

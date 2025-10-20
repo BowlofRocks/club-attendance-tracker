@@ -1,4 +1,3 @@
-import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link } from 'react-router-dom'; // If you're using React Router
 
@@ -14,6 +13,7 @@ const NavBar = () => {
           <Button color="inherit" component={Link} to="/">Home</Button>
           <Button color="inherit" component={Link} to="/members">Memebers</Button>
           <Button color="inherit" component={Link} to="/contact">Contact</Button>
+          <Button color="inherit" component={Link} to="/login">Login</Button>
         </Box>
       </Toolbar>
     </AppBar>

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "subscriptionType": "Guild Member",
+    "startDate": "2025-05-15",
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "name": "Bob Smith",
+    "subscriptionType": "Free Trial",
+    "startDate": "2025-06-01",
+    "isActive": true
+  }
+]

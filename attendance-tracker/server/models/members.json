@@ -3,378 +3,1254 @@
     "id": 1,
     "name": "David Bell",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 2,
     "name": "Tanner Larson",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
-    }
-  },
-  {
-    "id": 3,
-    "name": "Sarah West",
-    "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
-    }
-  },
-  {
-    "id": 4,
-    "name": "James Roy",
-    "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 5,
     "name": "Nicholas Black",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 6,
     "name": "Alana Black",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 7,
     "name": "Evan Meacham",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 8,
     "name": "Tylor Chatterley",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 9,
     "name": "Sarah Thiel",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 10,
     "name": "Joshua Kakuschke",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 11,
     "name": "Sean Ramos",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 12,
     "name": "Bryan Anderson",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 13,
     "name": "Yavanna Carlos",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 14,
     "name": "Chandler Ranada",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 15,
     "name": "Becca Olsen",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 16,
     "name": "Anthony Olsen",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 17,
     "name": "Ryan (Blake) Purser",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 18,
     "name": "Luke Levitt",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 19,
     "name": "Foryst Van Dyke",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 20,
     "name": "Jacob Brookhart",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   },
   {
     "id": 21,
     "name": "Jackson Brookhart",
     "attendance": {
-      "January": { "presentDates": [], "count": 0, "total": 16 },
-      "February": { "presentDates": [], "count": 0, "total": 16 },
-      "March": { "presentDates": [], "count": 0, "total": 16 },
-      "April": { "presentDates": [], "count": 0, "total": 16 },
-      "May": { "presentDates": [], "count": 0, "total": 16 },
-      "June": { "presentDates": [], "count": 0, "total": 16 },
-      "July": { "presentDates": [], "count": 0, "total": 16 },
-      "August": { "presentDates": [], "count": 0, "total": 16 },
-      "September": { "presentDates": [], "count": 0, "total": 16 },
-      "October": { "presentDates": [], "count": 0, "total": 16 },
-      "November": { "presentDates": [], "count": 0, "total": 16 },
-      "December": { "presentDates": [], "count": 0, "total": 16 }
+      "January": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "February": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "March": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "April": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "May": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "June": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "July": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "August": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "September": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "October": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "November": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      },
+      "December": {
+        "presentDates": [],
+        "count": 0,
+        "total": 16
+      }
     }
   }
 ]

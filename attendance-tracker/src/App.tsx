@@ -3,7 +3,7 @@ import Footer from "./views/partials/Footer/Index"
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import AttendanceList from "./views/attendance/Index";
 import SubscriptionsList from "./views/subscriptions/Index";
-
+import Login from "./views/login/index";
 
 function App() {
   return (
@@ -16,6 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<AttendanceList />} />
           <Route path="/members" element={<SubscriptionsList />} />
+          <Route path="/login" element={<Login />} />
+
         </Routes>
       </main>
 
