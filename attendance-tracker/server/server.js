@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import membersRoutes from "./routes/members.js";
 import subscriptionsRoutes from "./routes/subscriptions.js";
 import attendanceRoutes from "./routes/attendance.js";
+import authRoutes from "./routes/auth.js";
+import analyticsRoutes from "./routes/analytics.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -35,6 +37,8 @@ db.connect((err) => {
 app.use("/api/members", membersRoutes);
 app.use("/api/subscriptions", subscriptionsRoutes);
 app.use("/api/attendance", attendanceRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 // Catch-all handler temporarily removed to avoid route parsing issues
 // app.get('*', (req, res) => {

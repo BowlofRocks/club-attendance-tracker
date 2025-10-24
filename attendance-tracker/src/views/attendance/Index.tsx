@@ -1,7 +1,34 @@
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef } from "@mui/x-data-grid";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line, Bar, Pie } from 'react-chartjs-2';
 import './index.css';
+import './analytics.css';
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 type AttendanceRecord = {
   presentDates: string[];
@@ -24,6 +51,18 @@ type Member = {
   attendance_percentage: number;
 };
 
+type AttendanceTrend = {
+  attendance_date: string;
+  member_count: number;
+};
+
+type Stats = {
+  total_members: number;
+  active_members: number;
+  total_meeting_days: number;
+  today_attendance: number;
+};
+
 const AttendanceList = () => {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
@@ -34,6 +73,11 @@ const AttendanceList = () => {
   const [manualTotalDays, setManualTotalDays] = useState<number | null>(null);
   const [showDaysOverride, setShowDaysOverride] = useState(false);
   const [showYearEndNotification, setShowYearEndNotification] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  // Analytics state
+  const [attendanceTrends, setAttendanceTrends] = useState<AttendanceTrend[]>([]);
+  const [stats, setStats] = useState<Stats | null>(null);
 
   // Format date from YYYY-MM-DD to MM/DD/YYYY
   const formatDate = (dateString: string) => {
@@ -75,14 +119,45 @@ const AttendanceList = () => {
     }
   };
 
+  // Fetch analytics data
+  const fetchAnalyticsData = async () => {
+    if (!isLoggedIn) return;
+    
+    try {
+      const [trendsRes, statsRes] = await Promise.all([
+        fetch('http://localhost:3001/api/analytics/attendance-trends?days=30'),
+        fetch('http://localhost:3001/api/analytics/stats'),
+      ]);
+
+      const trendsData = await trendsRes.json();
+      const statsData = await statsRes.json();
+
+      setAttendanceTrends(trendsData);
+      setStats(statsData);
+    } catch (err) {
+      console.error('Error fetching analytics data:', err);
+    }
+  };
+
   useEffect(() => {
     fetchMembers();
+    
+    // Check if user is logged in
+    const userStr = localStorage.getItem('user');
+    const loggedIn = !!userStr;
+    setIsLoggedIn(loggedIn);
+    
+    // Fetch analytics if logged in
+    if (loggedIn) {
+      fetchAnalyticsData();
+    }
+    
     // Check if it's November or December to show year-end notification
     const currentMonth = new Date().getMonth();
     if (currentMonth === 10 || currentMonth === 11) { // November (10) or December (11)
       setShowYearEndNotification(true);
     }
-  }, [dateRange]);
+  }, [dateRange, isLoggedIn]);
 
   const handleMarkAttendance = async (id: number) => {
     const today = new Date().toISOString().split("T")[0];
@@ -168,7 +243,7 @@ const AttendanceList = () => {
     { field: "name", headerName: "Name", flex: 1 },
     { field: "attended", headerName: "Days Attended", width: 130 },
     { field: "total", headerName: "Total Days", width: 100 },
-    { field: "percentage", headerName: "Attendance %", width: 120 },
+    ...(isLoggedIn ? [{ field: "percentage", headerName: "Attendance %", width: 120 }] : []),
     {
       field: "mark",
       headerName: "Mark Today",
@@ -263,33 +338,34 @@ const AttendanceList = () => {
         </p>
       </div>
 
-      <div className="admin-override-section">
-        <h3 className="override-title">Admin Controls</h3>
-        <div style={{ marginBottom: '20px' }}>
-          <button
-            className="admin-btn"
-            onClick={handleResetAllAttendance}
-            style={{
-              backgroundColor: '#dc3545',
-              color: 'white',
-              border: 'none',
-              padding: '10px 20px',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              fontSize: '0.95rem'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#c82333'}
-            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#dc3545'}
-          >
-            🗑️ Reset All Attendance Records
-          </button>
-          <span style={{ marginLeft: '12px', fontSize: '0.85rem', color: '#6c757d', fontStyle: 'italic' }}>
-            Warning: This will permanently delete all attendance data
-          </span>
-        </div>
-        
-        <h4 style={{ marginTop: '24px', marginBottom: '12px', fontSize: '1rem' }}>Override Total Meeting Days</h4>
+      {isLoggedIn && (
+        <div className="admin-override-section">
+          <h3 className="override-title">Admin Controls</h3>
+          <div style={{ marginBottom: '20px' }}>
+            <button
+              className="admin-btn"
+              onClick={handleResetAllAttendance}
+              style={{
+                backgroundColor: '#dc3545',
+                color: 'white',
+                border: 'none',
+                padding: '10px 20px',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                fontSize: '0.95rem'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#c82333'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#dc3545'}
+            >
+              🗑️ Reset All Attendance Records
+            </button>
+            <span style={{ marginLeft: '12px', fontSize: '0.85rem', color: '#6c757d', fontStyle: 'italic' }}>
+              Warning: This will permanently delete all attendance data
+            </span>
+          </div>
+          
+          <h4 style={{ marginTop: '24px', marginBottom: '12px', fontSize: '1rem' }}>Override Total Meeting Days</h4>
         {!showDaysOverride ? (
           <div className="override-controls">
             <button
@@ -338,7 +414,8 @@ const AttendanceList = () => {
             : "Using automatic calculation based on unique attendance dates in database."
           }
         </p>
-      </div>
+        </div>
+      )}
 
       <DataGrid
         className="custom-header"
@@ -351,6 +428,55 @@ const AttendanceList = () => {
         disableRowSelectionOnClick
         autoHeight
       />
+
+      {/* Analytics Section - Only visible when logged in */}
+      {isLoggedIn && stats && (
+        <div className="analytics-section">
+          <h2 className="analytics-section-title">Analytics Dashboard</h2>
+
+          {/* Statistics Cards */}
+          <div className="stats-grid">
+            <div className="stat-card">
+              <h3>Total Members</h3>
+              <p className="stat-value">{stats.total_members}</p>
+            </div>
+            <div className="stat-card">
+              <h3>Active Members</h3>
+              <p className="stat-value">{stats.active_members}</p>
+            </div>
+            <div className="stat-card">
+              <h3>Total Meetings</h3>
+              <p className="stat-value">{stats.total_meeting_days}</p>
+            </div>
+            <div className="stat-card">
+              <h3>Today's Attendance</h3>
+              <p className="stat-value">{stats.today_attendance}</p>
+            </div>
+          </div>
+
+          {/* Attendance Trends Chart */}
+          {attendanceTrends.length > 0 && (
+            <div className="chart-card">
+              <h3>Attendance Trends (Last 30 Days)</h3>
+              <Line 
+                data={{
+                  labels: attendanceTrends.map(item => new Date(item.attendance_date).toLocaleDateString()),
+                  datasets: [
+                    {
+                      label: 'Members Present',
+                      data: attendanceTrends.map(item => item.member_count),
+                      borderColor: 'rgb(75, 192, 192)',
+                      backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                      tension: 0.3,
+                    },
+                  ],
+                }} 
+                options={{ responsive: true, maintainAspectRatio: true }} 
+              />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

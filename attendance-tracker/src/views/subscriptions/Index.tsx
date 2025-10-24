@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef, GridRenderCellParams, GridRowModel } from "@mui/x-data-grid";
 import "./Index.css";
@@ -22,6 +23,7 @@ const SubscriptionsList = () => {
     pageSize: 5,
     page: 0,
   });
+  const navigate = useNavigate();
 
   const [showAddForm, setShowAddForm] = useState(false);
   const [newMember, setNewMember] = useState({
@@ -46,8 +48,16 @@ const SubscriptionsList = () => {
   };
 
   useEffect(() => {
+    // Check if user is logged in
+    const userStr = localStorage.getItem('user');
+    if (!userStr) {
+      // Redirect to login if not logged in
+      navigate('/login');
+      return;
+    }
+    
     fetchMembers();
-  }, []);
+  }, [navigate]);
 
   const handleAddMember = async () => {
     if (!newMember.first_name.trim() || !newMember.last_name.trim()) {

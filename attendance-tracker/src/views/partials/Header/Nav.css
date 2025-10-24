@@ -43,6 +43,21 @@
   color: white !important;
 }
 
+.nav-user-name {
+  color: white !important;
+  margin-right: 12px !important;
+  font-weight: 500 !important;
+  font-size: 0.95rem !important;
+}
+
+.nav-logout-button {
+  background-color: rgba(220, 53, 69, 0.8) !important;
+}
+
+.nav-logout-button:hover {
+  background-color: rgba(220, 53, 69, 1) !important;
+}
+
 /* Responsive navigation */
 @media (max-width: 768px) {
   .nav-title {
