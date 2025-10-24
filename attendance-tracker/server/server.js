@@ -4,6 +4,7 @@ import db from "./db/index.js"; // your MySQL connection
 import dotenv from "dotenv";
 import membersRoutes from "./routes/members.js";
 import subscriptionsRoutes from "./routes/subscriptions.js";
+import attendanceRoutes from "./routes/attendance.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -33,6 +34,7 @@ db.connect((err) => {
 
 app.use("/api/members", membersRoutes);
 app.use("/api/subscriptions", subscriptionsRoutes);
+app.use("/api/attendance", attendanceRoutes);
 
 // Catch-all handler temporarily removed to avoid route parsing issues
 // app.get('*', (req, res) => {

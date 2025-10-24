@@ -1,98 +1,182 @@
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import type { GridColDef, GridRenderCellParams, GridRowModel } from "@mui/x-data-grid";
+import "./Index.css";
 
-type Subscription = {
+type Member = {
   id: number;
   name: string;
-  subscriptionType: string;
-  startDate: string;
-  isActive: boolean;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  join_date: string;
+  tier_type: string;
+  pay_status: string;
 };
 
 const SubscriptionsList = () => {
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
+  const [paginationModel, setPaginationModel] = useState({
+    pageSize: 5,
+    page: 0,
+  });
 
-  const [newMemberName, setNewMemberName] = useState("");
-  const [newSubscriptionType, setNewSubscriptionType] = useState("Free Trial");
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newMember, setNewMember] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    tier_type: "Free Trial",
+    pay_status: "Paid"
+  });
 
-  const fetchSubscriptions = async () => {
+  const fetchMembers = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/subscriptions");
+      const res = await fetch("http://localhost:3001/api/members");
       const data = await res.json();
-      setSubscriptions(data);
+      setMembers(data);
       setLoading(false);
     } catch (err) {
-      console.error("Error fetching subscriptions:", err);
+      console.error("Error fetching members:", err);
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchSubscriptions();
+    fetchMembers();
   }, []);
 
-  const handleAddSubscription = () => {
-    if (!newMemberName.trim()) return;
+  const handleAddMember = async () => {
+    if (!newMember.first_name.trim() || !newMember.last_name.trim()) {
+      alert('First name and last name are required!');
+      return;
+    }
 
-    const newSub: Subscription = {
-      id: subscriptions.length ? Math.max(...subscriptions.map((s) => s.id)) + 1 : 1,
-      name: newMemberName.trim(),
-      subscriptionType: newSubscriptionType,
-      startDate: new Date().toISOString(),
-      isActive: true,
-    };
+    try {
+      const response = await fetch('http://localhost:3001/api/members', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          first_name: newMember.first_name,
+          last_name: newMember.last_name,
+          email: newMember.email,
+          phone: newMember.phone,
+          tier_id: newMember.tier_type === 'Free Trial' ? 1 : 2,
+          pay_status_id: newMember.pay_status === 'Paid' ? 1 : newMember.pay_status === 'Pending' ? 2 : 3
+        })
+      });
 
-    setSubscriptions([...subscriptions, newSub]);
-    setNewMemberName("");
-    setNewSubscriptionType("Free Trial");
+      if (response.ok) {
+        // Refresh the member list
+        await fetchMembers();
+        // Reset form
+        setNewMember({
+          first_name: "",
+          last_name: "",
+          email: "",
+          phone: "",
+          tier_type: "Free Trial",
+          pay_status: "Paid"
+        });
+        setShowAddForm(false);
+      } else {
+        alert('Error adding member');
+      }
+    } catch (error) {
+      console.error('Error adding member:', error);
+      alert('Error adding member');
+    }
+  };
 
-    // TODO: Add POST request to backend to save new member if persistence is desired
+  const handleInputChange = (field: string, value: string) => {
+    setNewMember(prev => ({ ...prev, [field]: value }));
+  };
+
+  // Handle inline editing updates
+  const handleUpdateMember = async (updatedMember: Member) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/members/${updatedMember.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: updatedMember.email,
+          phone: updatedMember.phone,
+          tier_type: updatedMember.tier_type,
+          pay_status: updatedMember.pay_status,
+          join_date: updatedMember.join_date
+        })
+      });
+
+      if (response.ok) {
+        // Refresh the member list to get updated data
+        await fetchMembers();
+      } else {
+        alert('Error updating member');
+      }
+    } catch (error) {
+      console.error('Error updating member:', error);
+      alert('Error updating member');
+    }
+  };
+
+  const processRowUpdate = (newRow: GridRowModel) => {
+    // Convert Date object to string format if needed
+    if (newRow.join_date instanceof Date) {
+      newRow.join_date = newRow.join_date.toISOString().split('T')[0];
+    }
+    handleUpdateMember(newRow as Member);
+    return newRow;
   };
 
   // DELETE handler
-  const handleDeleteSubscription = (id: number) => {
-    const updatedSubs = subscriptions.filter((sub) => sub.id !== id);
-    setSubscriptions(updatedSubs);
+  const handleDeleteMember = (id: number) => {
+    const updatedMembers = members.filter((member) => member.id !== id);
+    setMembers(updatedMembers);
 
     // TODO: Add DELETE request to backend to delete member permanently
   };
 
-  // Toggle the isActive property
-  const toggleActive = (id: number) => {
-    const updatedSubs = subscriptions.map((sub) =>
-      sub.id === id ? { ...sub, isActive: !sub.isActive } : sub
-    );
-    setSubscriptions(updatedSubs);
-
-    // TODO: Send PATCH/PUT request to backend to update isActive status persistently
-  };
 
   const columns: GridColDef[] = [
-    { field: "name", headerName: "Name", flex: 1 },
-    { field: "subscriptionType", headerName: "Subscription Type", flex: 1 },
-    {
-      field: "startDate",
-      headerName: "Start Date",
-      flex: 1,
-      valueFormatter: (params: { value: string }) =>
-        new Date(params.value).toLocaleDateString(),
+    { field: "name", headerName: "Name", flex: 1, editable: false },
+    { field: "email", headerName: "Email", flex: 1, editable: true },
+    { field: "phone", headerName: "Phone", width: 120, editable: true },
+    { 
+      field: "tier_type", 
+      headerName: "Tier", 
+      width: 120, 
+      editable: true,
+      type: 'singleSelect',
+      valueOptions: ['Free Trial', 'Guild Member']
+    },
+    { 
+      field: "pay_status", 
+      headerName: "Status", 
+      width: 100, 
+      editable: true,
+      type: 'singleSelect',
+      valueOptions: ['Paid', 'Pending', 'Overdue']
     },
     {
-      field: "isActive",
-      headerName: "Active",
-      width: 100,
-renderCell: (params: GridRenderCellParams<Subscription>) => (
-  <input
-    type="checkbox"
-    checked={params.value}
-    onChange={() => toggleActive(params.row.id)}
-    style={{ cursor: "pointer" }}
-  />
-),
-      sortable: false,
-      filterable: false,
+      field: "join_date",
+      headerName: "Join Date",
+      width: 120,
+      editable: true,
+      type: 'date',
+      valueFormatter: (params: any) => {
+        if (params.value) {
+          const date = new Date(params.value);
+          return date.toLocaleDateString();
+        }
+        return '';
+      },
     },
     {
       field: "delete",
@@ -102,15 +186,8 @@ renderCell: (params: GridRenderCellParams<Subscription>) => (
       filterable: false,
       renderCell: (params) => (
         <button
-          style={{
-            color: "white",
-            backgroundColor: "red",
-            border: "none",
-            padding: "4px 8px",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-          onClick={() => handleDeleteSubscription(params.row.id)}
+          className="btn-danger"
+          onClick={() => handleDeleteMember(params.row.id)}
         >
           Delete
         </button>
@@ -119,36 +196,134 @@ renderCell: (params: GridRenderCellParams<Subscription>) => (
   ];
 
   return (
-    <div style={{ width: "100%" }}>
-      <h2>Subscriptions</h2>
+    <div className="members-container">
+      <h2 className="members-title">Members</h2>
 
-      <div style={{ marginBottom: "1rem" }}>
-        <input
-          type="text"
-          placeholder="New member name"
-          value={newMemberName}
-          onChange={(e) => setNewMemberName(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
-        />
-        <select
-          value={newSubscriptionType}
-          onChange={(e) => setNewSubscriptionType(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
+      <div className="add-member-section">
+        <button 
+          onClick={() => setShowAddForm(!showAddForm)}
+          className={`add-member-toggle ${showAddForm ? 'cancel' : ''}`}
         >
-          <option value="Free Trial">Free Trial</option>
-          <option value="Guild Member">Guild Member</option>
-        </select>
-        <button onClick={handleAddSubscription}>Add Member</button>
+          {showAddForm ? "Cancel" : "+ Add New Member"}
+        </button>
+
+        {showAddForm && (
+          <div className="add-member-form">
+            <h3 className="form-title">Add New Member</h3>
+            
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">First Name *</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={newMember.first_name}
+                  onChange={(e) => handleInputChange('first_name', e.target.value)}
+                  placeholder="Enter first name"
+                />
+              </div>
+              
+              <div className="form-group">
+                <label className="form-label">Last Name *</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={newMember.last_name}
+                  onChange={(e) => handleInputChange('last_name', e.target.value)}
+                  placeholder="Enter last name"
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-input"
+                  value={newMember.email}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  placeholder="Enter email address"
+                />
+              </div>
+              
+              <div className="form-group">
+                <label className="form-label">Phone</label>
+                <input
+                  type="tel"
+                  className="form-input"
+                  value={newMember.phone}
+                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                  placeholder="Enter phone number"
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">Membership Tier</label>
+                <select
+                  className="form-select"
+                  value={newMember.tier_type}
+                  onChange={(e) => handleInputChange('tier_type', e.target.value)}
+                >
+                  <option value="Free Trial">Free Trial</option>
+                  <option value="Guild Member">Guild Member</option>
+                </select>
+              </div>
+              
+              <div className="form-group">
+                <label className="form-label">Payment Status</label>
+                <select
+                  className="form-select"
+                  value={newMember.pay_status}
+                  onChange={(e) => handleInputChange('pay_status', e.target.value)}
+                >
+                  <option value="Paid">Paid</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Overdue">Overdue</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form-buttons">
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="btn btn-secondary"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAddMember}
+                className="btn btn-primary"
+              >
+                Add Member
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="member-count-badge" style={{ marginBottom: '1rem' }}>
+        Total Members: {members.length}
       </div>
 
       <DataGrid
-        rows={subscriptions}
+        rows={members}
         columns={columns}
         loading={loading}
-        pageSizeOptions={[5, 10]}
-        paginationModel={{ pageSize: 5, page: 0 }}
+        pageSizeOptions={[5, 10, 25]}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        processRowUpdate={processRowUpdate}
         disableRowSelectionOnClick
         autoHeight
+        sx={{
+          '& .MuiDataGrid-pagination': {
+            display: 'flex',
+            justifyContent: 'center'
+          }
+        }}
       />
     </div>
   );

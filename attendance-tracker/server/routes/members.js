@@ -82,6 +82,74 @@ router.post("/", (req, res) => {
   });
 });
 
+// Update a member
+router.put("/:id", (req, res) => {
+  const memberId = parseInt(req.params.id);
+  const { email, phone, tier_type, pay_status, join_date } = req.body;
+  
+  // Convert tier_type to tier_id
+  const tierMap = {
+    'Free Trial': 1,
+    'Guild Member': 2
+  };
+  
+  // Convert pay_status to pay_status_id
+  const statusMap = {
+    'Paid': 1,
+    'Pending': 2,
+    'Overdue': 3
+  };
+  
+  const tier_id = tierMap[tier_type];
+  const pay_status_id = statusMap[pay_status];
+  
+  if (!tier_id || !pay_status_id) {
+    return res.status(400).json({ error: "Invalid tier type or pay status" });
+  }
+  
+  // Format join_date properly for MySQL (convert MM/DD/YYYY to YYYY-MM-DD)
+  let formattedJoinDate = join_date;
+  if (join_date) {
+    // Handle both Date object and string formats
+    let date;
+    if (typeof join_date === 'string') {
+      // If it's MM/DD/YYYY format, parse it correctly
+      const parts = join_date.split('/');
+      if (parts.length === 3) {
+        // MM/DD/YYYY -> create Date(year, month-1, day)
+        date = new Date(parseInt(parts[2]), parseInt(parts[0]) - 1, parseInt(parts[1]));
+      } else {
+        date = new Date(join_date);
+      }
+    } else {
+      date = new Date(join_date);
+    }
+    
+    if (!isNaN(date.getTime())) {
+      formattedJoinDate = date.toISOString().split('T')[0]; // YYYY-MM-DD format
+    }
+  }
+  
+  const query = `
+    UPDATE member 
+    SET email = ?, phone = ?, tier_id = ?, pay_status_id = ?, join_date = ?
+    WHERE member_id = ?
+  `;
+  
+  db.query(query, [email, phone, tier_id, pay_status_id, formattedJoinDate, memberId], (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Member not found' });
+    }
+    
+    res.json({ message: 'Member updated successfully' });
+  });
+});
+
 router.delete("/:id", (req, res) => {
   try {
     const memberId = parseInt(req.params.id);
