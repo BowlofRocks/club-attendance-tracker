@@ -211,6 +211,123 @@ p, span, div, label, input, select, button {
   font-style: italic;
 }
 
+/* Year-end notification banner */
+.year-end-notification {
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.year-end-notification strong {
+  color: #856404;
+}
+
+.year-end-notification span {
+  color: #856404;
+  margin-left: 8px;
+}
+
+.notification-close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #856404;
+}
+
+.notification-close-btn:hover {
+  opacity: 0.7;
+}
+
+/* Yearly reset notification banner */
+.yearly-reset-notification {
+  background-color: #f8d7da;
+  border: 2px solid #dc3545;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.yearly-reset-notification strong {
+  color: #721c24;
+  font-size: 1.1rem;
+}
+
+.yearly-reset-notification p {
+  color: #721c24;
+  margin: 8px 0 0 0;
+  font-size: 0.95rem;
+}
+
+.yearly-reset-dismiss-btn {
+  background: #dc3545;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.yearly-reset-dismiss-btn:hover {
+  background-color: #c82333;
+}
+
+/* Reset all attendance button container */
+.reset-attendance-container {
+  margin-bottom: 20px;
+}
+
+.admin-btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.admin-btn-danger:hover {
+  background-color: #c82333;
+}
+
+.warning-text {
+  margin-left: 12px;
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Override section headings */
+.override-section-heading {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.override-label {
+  font-weight: bold;
+}
+
+.override-status {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .filter-controls {

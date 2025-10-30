@@ -6,6 +6,7 @@ import SubscriptionsList from "./views/subscriptions/Index";
 import Login from "./views/login/index";
 import ForgotPassword from "./views/forgot-password/index";
 import ResetPassword from "./views/forgot-password/reset";
+import Contact from "./views/contact/Index";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AttendanceList />} />
           <Route path="/members" element={<SubscriptionsList />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />

@@ -14,6 +14,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line, Bar, Pie } from 'react-chartjs-2';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import './index.css';
 import './analytics.css';
 
@@ -73,6 +75,7 @@ const AttendanceList = () => {
   const [manualTotalDays, setManualTotalDays] = useState<number | null>(null);
   const [showDaysOverride, setShowDaysOverride] = useState(false);
   const [showYearEndNotification, setShowYearEndNotification] = useState(false);
+  const [showYearlyResetNotification, setShowYearlyResetNotification] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
   // Analytics state
@@ -90,7 +93,7 @@ const AttendanceList = () => {
   };
 
   const [paginationModel, setPaginationModel] = useState({
-    pageSize: 5,
+    pageSize: 10,
     page: 0,
   });
 
@@ -157,7 +160,36 @@ const AttendanceList = () => {
     if (currentMonth === 10 || currentMonth === 11) { // November (10) or December (11)
       setShowYearEndNotification(true);
     }
+    
+    // Check for yearly attendance reset
+    if (loggedIn) {
+      checkYearlyResetStatus();
+    }
   }, [dateRange, isLoggedIn]);
+  
+  const checkYearlyResetStatus = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/api/attendance/yearly-reset/status');
+      const data = await res.json();
+      
+      if (data.needs_reset && !data.notification_dismissed) {
+        setShowYearlyResetNotification(true);
+      }
+    } catch (err) {
+      console.error('Error checking yearly reset status:', err);
+    }
+  };
+  
+  const dismissYearlyResetNotification = async () => {
+    try {
+      await fetch('http://localhost:3001/api/attendance/yearly-reset/dismiss', {
+        method: 'POST'
+      });
+      setShowYearlyResetNotification(false);
+    } catch (err) {
+      console.error('Error dismissing notification:', err);
+    }
+  };
 
   const handleMarkAttendance = async (id: number) => {
     const today = new Date().toISOString().split("T")[0];
@@ -188,6 +220,136 @@ const AttendanceList = () => {
       console.error('Error marking attendance:', error);
       alert('Error marking attendance');
     }
+  };
+
+  const handleExportToPDF = () => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    
+    // Title
+    doc.setFontSize(20);
+    doc.setTextColor(0, 123, 255);
+    doc.text('Attendance Analytics Report', pageWidth / 2, 20, { align: 'center' });
+    
+    // Date
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    const reportDate = new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    doc.text(`Generated on: ${reportDate}`, pageWidth / 2, 28, { align: 'center' });
+    
+    // Statistics Section
+    doc.setFontSize(14);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Key Statistics', 14, 40);
+    
+    if (stats) {
+      const statsData = [
+        ['Metric', 'Value'],
+        ['Total Members', stats.total_members.toString()],
+        ['Active Members', stats.active_members.toString()],
+        ['Total Meetings', stats.total_meeting_days.toString()],
+        ["Today's Attendance", stats.today_attendance.toString()]
+      ];
+      
+      autoTable(doc, {
+        startY: 45,
+        head: [statsData[0]],
+        body: statsData.slice(1),
+        theme: 'grid',
+        headStyles: { fillColor: [0, 123, 255] },
+        margin: { left: 14, right: 14 }
+      });
+    }
+    
+    // Attendance Table
+    const finalY = (doc as any).lastAutoTable?.finalY || 80;
+    doc.setFontSize(14);
+    doc.text('Member Attendance Details', 14, finalY + 10);
+    
+    const attendanceData = members.map(member => {
+      const totalDays = manualTotalDays || member.total_possible_days;
+      const percentage = totalDays > 0 ? Math.round((member.days_attended / totalDays) * 100) : 0;
+      return [
+        member.name,
+        member.days_attended.toString(),
+        totalDays.toString(),
+        `${percentage}%`
+      ];
+    });
+    
+    autoTable(doc, {
+      startY: finalY + 15,
+      head: [['Name', 'Days Attended', 'Total Days', 'Attendance %']],
+      body: attendanceData,
+      theme: 'striped',
+      headStyles: { fillColor: [0, 123, 255] },
+      margin: { left: 14, right: 14 }
+    });
+    
+    // Attendance Trends
+    if (attendanceTrends.length > 0) {
+      const trendsY = (doc as any).lastAutoTable?.finalY || 150;
+      
+      // Check if we need a new page
+      if (trendsY > 250) {
+        doc.addPage();
+        doc.setFontSize(14);
+        doc.text('Attendance Trends (Last 30 Days)', 14, 20);
+        
+        const trendsData = attendanceTrends.map(trend => [
+          new Date(trend.attendance_date).toLocaleDateString(),
+          trend.member_count.toString()
+        ]);
+        
+        autoTable(doc, {
+          startY: 25,
+          head: [['Date', 'Members Present']],
+          body: trendsData,
+          theme: 'grid',
+          headStyles: { fillColor: [75, 192, 192] },
+          margin: { left: 14, right: 14 }
+        });
+      } else {
+        doc.setFontSize(14);
+        doc.text('Attendance Trends (Last 30 Days)', 14, trendsY + 10);
+        
+        const trendsData = attendanceTrends.slice(0, 10).map(trend => [
+          new Date(trend.attendance_date).toLocaleDateString(),
+          trend.member_count.toString()
+        ]);
+        
+        autoTable(doc, {
+          startY: trendsY + 15,
+          head: [['Date', 'Members Present']],
+          body: trendsData,
+          theme: 'grid',
+          headStyles: { fillColor: [75, 192, 192] },
+          margin: { left: 14, right: 14 }
+        });
+      }
+    }
+    
+    // Footer
+    const pageCount = doc.getNumberOfPages();
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.text(
+        `Page ${i} of ${pageCount}`,
+        pageWidth / 2,
+        doc.internal.pageSize.getHeight() - 10,
+        { align: 'center' }
+      );
+    }
+    
+    // Save the PDF
+    const fileName = `attendance-report-${new Date().toISOString().split('T')[0]}.pdf`;
+    doc.save(fileName);
   };
 
   const handleResetAllAttendance = async () => {
@@ -267,33 +429,35 @@ const AttendanceList = () => {
       <p><strong>Today is:</strong> {formattedToday}</p>
 
       {showYearEndNotification && (
-        <div style={{
-          backgroundColor: '#fff3cd',
-          border: '1px solid #ffc107',
-          borderRadius: '4px',
-          padding: '12px 16px',
-          marginBottom: '20px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
+        <div className="year-end-notification">
           <div>
-            <strong style={{ color: '#856404' }}>⚠️ Year-End Reminder:</strong>
-            <span style={{ color: '#856404', marginLeft: '8px' }}>
+            <strong>⚠️ Year-End Reminder:</strong>
+            <span>
               Remember to clear attendance records at the end of the year to start fresh for the next academic year.
             </span>
           </div>
           <button
             onClick={() => setShowYearEndNotification(false)}
-            style={{
-              background: 'none',
-              border: 'none',
-              fontSize: '20px',
-              cursor: 'pointer',
-              color: '#856404'
-            }}
+            className="notification-close-btn"
           >
             ×
+          </button>
+        </div>
+      )}
+
+      {showYearlyResetNotification && isLoggedIn && (
+        <div className="yearly-reset-notification">
+          <div>
+            <strong>🗓️ New Year - Attendance Reset Reminder</strong>
+            <p>
+              It's a new year! Use the "Reset All Attendance Records" button in Admin Controls below to clear last year's data and start fresh.
+            </p>
+          </div>
+          <button
+            onClick={dismissYearlyResetNotification}
+            className="yearly-reset-dismiss-btn"
+          >
+            Dismiss
           </button>
         </div>
       )}
@@ -341,31 +505,19 @@ const AttendanceList = () => {
       {isLoggedIn && (
         <div className="admin-override-section">
           <h3 className="override-title">Admin Controls</h3>
-          <div style={{ marginBottom: '20px' }}>
+          <div className="reset-attendance-container">
             <button
-              className="admin-btn"
+              className="admin-btn admin-btn-danger"
               onClick={handleResetAllAttendance}
-              style={{
-                backgroundColor: '#dc3545',
-                color: 'white',
-                border: 'none',
-                padding: '10px 20px',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                fontSize: '0.95rem'
-              }}
-              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#c82333'}
-              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#dc3545'}
             >
               🗑️ Reset All Attendance Records
             </button>
-            <span style={{ marginLeft: '12px', fontSize: '0.85rem', color: '#6c757d', fontStyle: 'italic' }}>
+            <span className="warning-text">
               Warning: This will permanently delete all attendance data
             </span>
           </div>
           
-          <h4 style={{ marginTop: '24px', marginBottom: '12px', fontSize: '1rem' }}>Override Total Meeting Days</h4>
+          <h4 className="override-section-heading">Override Total Meeting Days</h4>
         {!showDaysOverride ? (
           <div className="override-controls">
             <button
@@ -374,13 +526,13 @@ const AttendanceList = () => {
             >
               ⚙️ Override Total Days
             </button>
-            <span style={{ fontSize: '0.9rem', color: '#6c757d' }}>
+            <span className="override-status">
               Currently using calculated total: {members[0]?.total_possible_days || 0} days
             </span>
           </div>
         ) : (
           <div className="override-controls">
-            <label htmlFor="total-days-input" style={{ fontWeight: 'bold' }}>Total Meeting Days:</label>
+            <label htmlFor="total-days-input" className="override-label">Total Meeting Days:</label>
             <input
               id="total-days-input"
               type="number"
@@ -432,7 +584,12 @@ const AttendanceList = () => {
       {/* Analytics Section - Only visible when logged in */}
       {isLoggedIn && stats && (
         <div className="analytics-section">
-          <h2 className="analytics-section-title">Analytics Dashboard</h2>
+          <div className="analytics-header">
+            <h2 className="analytics-section-title">Analytics Dashboard</h2>
+            <button onClick={handleExportToPDF} className="export-pdf-button">
+              📄 Export to PDF
+            </button>
+          </div>
 
           {/* Statistics Cards */}
           <div className="stats-grid">

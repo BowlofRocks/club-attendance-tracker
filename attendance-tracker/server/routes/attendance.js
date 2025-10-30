@@ -77,7 +77,7 @@ router.get("/summary", (req, res) => {
   let queryParams = [];
   
   if (start_date && end_date) {
-    query += " WHERE a.attendance_date BETWEEN ? AND ?";
+    query += " WHERE a.attendance_date BETWEEN ? AND ? OR a.attendance_date IS NULL";
     queryParams.push(start_date, end_date, start_date, end_date);
   }
   
@@ -172,6 +172,81 @@ router.delete("/reset-all", (req, res) => {
       message: 'All attendance records have been reset',
       deleted_records: result.affectedRows
     });
+  });
+});
+
+// Get yearly attendance reset status
+router.get("/yearly-reset/status", (req, res) => {
+  const query = `
+    SELECT 
+      reset_date,
+      notification_dismissed,
+      YEAR(reset_date) as reset_year,
+      YEAR(CURDATE()) as current_year
+    FROM attendance_reset 
+    ORDER BY reset_date DESC 
+    LIMIT 1
+  `;
+  
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    
+    if (results.length === 0) {
+      // No reset record exists
+      return res.json({
+        needs_reset: false,
+        last_reset_date: null,
+        is_new_year: false,
+        notification_dismissed: false
+      });
+    }
+    
+    const lastReset = results[0];
+    const needsReset = lastReset.current_year > lastReset.reset_year;
+    
+    res.json({
+      needs_reset: needsReset,
+      last_reset_date: lastReset.reset_date,
+      is_new_year: needsReset,
+      notification_dismissed: lastReset.notification_dismissed === 1
+    });
+  });
+});
+
+// Dismiss yearly reset notification
+router.post("/yearly-reset/dismiss", (req, res) => {
+  const query = `
+    UPDATE attendance_reset 
+    SET notification_dismissed = 1 
+    WHERE reset_date = (SELECT MAX(r.reset_date) FROM (SELECT reset_date FROM attendance_reset) as r)
+  `;
+  
+  db.query(query, (err) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    
+    res.json({ message: 'Notification dismissed' });
+  });
+});
+
+// Record yearly reset (called when admin uses Reset All Attendance button)
+router.post("/yearly-reset/record", (req, res) => {
+  const recordResetQuery = `
+    INSERT INTO attendance_reset (reset_date, notification_dismissed) VALUES (CURDATE(), 1)
+  `;
+  
+  db.query(recordResetQuery, (err) => {
+    if (err) {
+      console.error('Error recording reset:', err);
+      return res.status(500).json({ error: 'Failed to record reset' });
+    }
+    
+    res.json({ message: 'Reset recorded successfully' });
   });
 });
 
